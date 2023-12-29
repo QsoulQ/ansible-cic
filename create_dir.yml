@@ -20,8 +20,8 @@
       notify: rshttpd
     - name: start service
       service: 
-       name: httpd 
-       state: started
+        name: httpd 
+        state: started
 
   handlers: 
     - name: rshttpd
