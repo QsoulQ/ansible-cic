@@ -15,15 +15,15 @@
       loop:
         - httpd
         - vsftpd
-    - name: change httpd config file
-      copy: src=/etc/httpd/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf.j2
-      notify: rshttpd
+#    - name: change httpd config file
+#      copy: src=/etc/httpd/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf.j2
+#      notify: rshttpd
     - name: start service
       service: 
         state: started
         name: httpd 
         
 
-  handlers: 
-    - name: rshttpd
-      service: name=httpd  state=restarted
+#  handlers: 
+#    - name: rshttpd
+#      service: name=httpd  state=restarted
