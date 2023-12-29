@@ -1,22 +1,28 @@
 ---
- - hosts: t
-   remote_user: root
-   vars_files: /etc/ansible/vars.yml
-   tasks:
-     - name: create files
-       file: path=/opt/f1.txt    state=touch
-     - name: install package
-       yum: name={{ var1 }}  state=present
-     - name: install package
-       yum: name={{ var2 }}
-     - name: change httpd config file
-       copy: src=/etc/httpd/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf
-       notify: rshttpd
-     - name: start service
-       service: 
-        name: httpd 
-        state: started
+- hosts: t
+  remote_user: root
+    #  vars_files: 
+    #    - /etc/ansible/vars.yml
 
-   handlers: 
-     - name: rshttpd
-       service: name=httpd  state=restarted
+  tasks:
+    - name: create files
+      file:
+        path: /opt/f1.txt    
+        state: touch
+    - name: install package
+      yum: 
+        name: "{{ item }}"
+      loop:
+        - httpd
+        - vsftpd
+    - name: change httpd config file
+      copy: src=/etc/httpd/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf
+      notify: rshttpd
+    - name: start service
+      service: 
+       name: httpd 
+       state: started
+
+  handlers: 
+    - name: rshttpd
+      service: name=httpd  state=restarted
