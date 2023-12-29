@@ -16,7 +16,7 @@
         - httpd
         - vsftpd
     - name: change httpd config file
-      copy: src=/etc/httpd/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf
+      copy: src=/etc/httpd/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf.j2
       notify: rshttpd
     - name: start service
       service: 
